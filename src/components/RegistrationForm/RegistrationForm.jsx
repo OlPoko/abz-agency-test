@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import styles from "./RegistrationForm.module.scss";
-import { fetchPositions, registerUser } from "../../services/api";
+import { fetchPositions, registerUser, fetchToken } from "../../services/api";
 
 export default function RegistrationForm({ onUserRegistered }) {
   const [positions, setPositions] = useState([]);
@@ -40,13 +40,12 @@ export default function RegistrationForm({ onUserRegistered }) {
       .test(
         "fileSize",
         "File too large (max 5MB)",
-        (value) => !value || (value && value.size <= 5242880)
+        (value) => !value || value.size <= 5242880
       )
       .test(
         "fileType",
         "Unsupported file format",
-        (value) =>
-          !value || (value && ["image/jpeg", "image/jpg"].includes(value.type))
+        (value) => !value || ["image/jpeg", "image/jpg"].includes(value.type)
       ),
   });
 
@@ -70,7 +69,8 @@ export default function RegistrationForm({ onUserRegistered }) {
         formData.append("position_id", values.position_id);
         formData.append("photo", values.photo);
 
-        await registerUser(formData);
+        const token = await fetchToken(); // ОТРИМУЄМО ТОКЕН
+        await registerUser(formData, token); // РЕЄСТРУЄМО КОРИСТУВАЧА З ТОКЕНОМ
 
         setSuccess(true);
         resetForm();
@@ -150,8 +150,7 @@ export default function RegistrationForm({ onUserRegistered }) {
                 : ""
             }
           />
-          <div className={styles.hint}> +38 (XXX) XXX - XX - XX</div>
-
+          <div className={styles.hint}>+38 (XXX) XXX - XX - XX</div>
           {formik.touched.phone && formik.errors.phone && (
             <div className={styles.error}>{formik.errors.phone}</div>
           )}
