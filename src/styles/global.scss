@@ -7,3 +7,27 @@ body {
   background: #f8f8f8;
   color: #000;
 }
+.button {
+  background: #f4e041;
+  border-radius: 80px;
+  height: 34px;
+  padding: 0 20px;
+  border: none;
+  font-weight: 600;
+  font-size: 16px;
+  color: #000;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+
+  &:hover:not(:disabled) {
+    background: #ffe302;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
