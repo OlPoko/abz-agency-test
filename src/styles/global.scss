@@ -7,6 +7,14 @@ body {
   background: #f8f8f8;
   color: #000;
 }
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
 .button {
   background: #f4e041;
   border-radius: 80px;

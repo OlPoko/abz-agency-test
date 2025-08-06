@@ -1,7 +1,6 @@
 .userList {
   max-width: 1200px;
   margin: 40px auto;
-  padding: 0 20px;
 
   .title {
     font-weight: 400;
@@ -10,6 +9,8 @@
     letter-spacing: 0%;
     text-align: center;
     vertical-align: bottom;
+    margin-bottom: 50px;
+    margin-top: 140px;
   }
 
   .list {
@@ -28,10 +29,13 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
     .photo {
+      display: block;
+      margin: 0 auto;
       width: 70px;
       height: 70px;
       border-radius: 50%;
       object-fit: cover;
+      margin-bottom: 20px;
     }
 
     .name {

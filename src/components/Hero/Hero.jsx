@@ -3,7 +3,7 @@ import styles from "./Hero.module.scss";
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      <div className={styles.container}>
+      <div className={`container ${styles.container}`}>
         <h1 className={styles.title}>
           Test assignment for front-end developer
         </h1>
