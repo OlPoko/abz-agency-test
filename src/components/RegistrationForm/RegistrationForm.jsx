@@ -184,19 +184,25 @@ export default function RegistrationForm({ onUserRegistered }) {
               )}
             </fieldset>
 
-            <input
-              id="photo"
-              type="file"
-              name="photo"
-              accept="image/jpeg, image/jpg"
-              onChange={onPhotoChange}
-              aria-label="Photo"
-              className={
-                formik.touched.photo && formik.errors.photo
-                  ? styles.inputError
-                  : ""
-              }
-            />
+            <div className={styles.uploadWrapper}>
+              <label htmlFor="photo" className={styles.uploadLabel}>
+                <span className={styles.uploadButton}>Upload</span>
+                <span className={styles.uploadText}>
+                  {formik.values.photo
+                    ? formik.values.photo.name
+                    : "Upload your photo"}
+                </span>
+              </label>
+              <input
+                id="photo"
+                type="file"
+                name="photo"
+                accept="image/jpeg, image/jpg"
+                onChange={onPhotoChange}
+                className={styles.hiddenInput}
+              />
+            </div>
+
             {photoPreview && (
               <img
                 src={photoPreview}
@@ -204,6 +210,7 @@ export default function RegistrationForm({ onUserRegistered }) {
                 className={styles.photoPreview}
               />
             )}
+
             {formik.touched.photo && formik.errors.photo && (
               <div className={styles.error}>{formik.errors.photo}</div>
             )}

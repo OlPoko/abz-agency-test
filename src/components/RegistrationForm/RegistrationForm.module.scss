@@ -9,11 +9,8 @@
   .title {
     font-weight: 400;
     font-size: 40px;
-
     line-height: 40px;
-    letter-spacing: 0%;
     text-align: center;
-    vertical-align: bottom;
     margin-top: 140px;
     margin-bottom: 50px;
   }
@@ -25,8 +22,7 @@
 
     input[type="text"],
     input[type="email"],
-    input[type="tel"],
-    input[type="file"] {
+    input[type="tel"] {
       padding: 10px;
       font-size: 16px;
       border: 1px solid #ccc;
@@ -78,12 +74,58 @@
         cursor: pointer;
       }
     }
-    .hint {
-      font-weight: 400;
-      font-size: 12px;
 
-      line-height: 14px;
-      letter-spacing: 0%;
+    .hint {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    .formButton {
+      align-self: center;
+      background-color: #b4b4b4;
+    }
+
+    // --- Custom upload section ---
+    .uploadWrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .uploadLabel {
+      display: flex;
+      align-items: center;
+      border: 1px solid #d0cfcf;
+      border-radius: 8px;
+      padding: 14px 16px;
+      cursor: pointer;
+      max-width: 380px;
+      transition: border-color 0.3s;
+
+      &:hover {
+        border-color: #000;
+      }
+    }
+
+    .uploadButton {
+      flex-shrink: 0;
+      border-right: 1px solid #d0cfcf;
+      padding-right: 15px;
+      margin-right: 15px;
+      font-weight: 500;
+      color: #000;
+    }
+
+    .uploadText {
+      color: #7e7e7e;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .hiddenInput {
+      display: none;
     }
 
     .photoPreview {
@@ -94,14 +136,8 @@
       object-fit: cover;
       border: 1px solid #ccc;
     }
-
-    .formButton {
-      align-self: center;
-      width: auto;
-
-      background-color: #b4b4b4;
-    }
   }
+
   .hint {
     font-size: 12px;
     color: #666;
