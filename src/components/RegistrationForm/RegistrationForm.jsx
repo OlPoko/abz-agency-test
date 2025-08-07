@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import styles from "./RegistrationForm.module.scss";
 import { fetchPositions, registerUser, fetchToken } from "../../services/api";
+import SuccessMessage from "../SuccessMessage/SuccessMessage";
 
 export default function RegistrationForm({ onUserRegistered }) {
   const [positions, setPositions] = useState([]);
@@ -69,8 +70,8 @@ export default function RegistrationForm({ onUserRegistered }) {
         formData.append("position_id", values.position_id);
         formData.append("photo", values.photo);
 
-        const token = await fetchToken(); // ОТРИМУЄМО ТОКЕН
-        await registerUser(formData, token); // РЕЄСТРУЄМО КОРИСТУВАЧА З ТОКЕНОМ
+        const token = await fetchToken();
+        await registerUser(formData, token);
 
         setSuccess(true);
         resetForm();
@@ -103,117 +104,120 @@ export default function RegistrationForm({ onUserRegistered }) {
     <section id="registration" className={styles.registrationForm}>
       <div className={`container ${styles.container}`}>
         <h2 className={styles.title}>Working with POST request</h2>
-        {success && (
-          <p className={styles.successMsg}>User successfully registered!</p>
-        )}
 
-        <form onSubmit={formik.handleSubmit} noValidate>
-          <input
-            type="text"
-            name="name"
-            placeholder="Your name"
-            aria-label="Name"
-            {...formik.getFieldProps("name")}
-            className={
-              formik.touched.name && formik.errors.name ? styles.inputError : ""
-            }
-          />
-          {formik.touched.name && formik.errors.name && (
-            <div className={styles.error}>{formik.errors.name}</div>
-          )}
-
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            aria-label="Email"
-            {...formik.getFieldProps("email")}
-            className={
-              formik.touched.email && formik.errors.email
-                ? styles.inputError
-                : ""
-            }
-          />
-          {formik.touched.email && formik.errors.email && (
-            <div className={styles.error}>{formik.errors.email}</div>
-          )}
-
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Phone"
-            aria-label="Phone"
-            {...formik.getFieldProps("phone")}
-            className={
-              formik.touched.phone && formik.errors.phone
-                ? styles.inputError
-                : ""
-            }
-          />
-          <div className={styles.hint}>+38 (XXX) XXX - XX - XX</div>
-          {formik.touched.phone && formik.errors.phone && (
-            <div className={styles.error}>{formik.errors.phone}</div>
-          )}
-
-          <fieldset className={styles.positionFieldset}>
-            <legend className={styles.legend}>Select your position</legend>
-            {positions.map((pos) => (
-              <label
-                key={pos.id}
-                htmlFor={`position-${pos.id}`}
-                className={styles.positionLabel}
-              >
-                <input
-                  id={`position-${pos.id}`}
-                  type="radio"
-                  name="position_id"
-                  value={pos.id}
-                  checked={formik.values.position_id === String(pos.id)}
-                  onChange={() =>
-                    formik.setFieldValue("position_id", String(pos.id))
-                  }
-                />
-                {pos.name}
-              </label>
-            ))}
-            {formik.touched.position_id && formik.errors.position_id && (
-              <div className={styles.error}>{formik.errors.position_id}</div>
-            )}
-          </fieldset>
-
-          <input
-            id="photo"
-            type="file"
-            name="photo"
-            accept="image/jpeg, image/jpg"
-            onChange={onPhotoChange}
-            aria-label="Photo"
-            className={
-              formik.touched.photo && formik.errors.photo
-                ? styles.inputError
-                : ""
-            }
-          />
-          {photoPreview && (
-            <img
-              src={photoPreview}
-              alt="Preview"
-              className={styles.photoPreview}
+        {success ? (
+          <SuccessMessage />
+        ) : (
+          <form onSubmit={formik.handleSubmit} noValidate>
+            <input
+              type="text"
+              name="name"
+              placeholder="Your name"
+              aria-label="Name"
+              {...formik.getFieldProps("name")}
+              className={
+                formik.touched.name && formik.errors.name
+                  ? styles.inputError
+                  : ""
+              }
             />
-          )}
-          {formik.touched.photo && formik.errors.photo && (
-            <div className={styles.error}>{formik.errors.photo}</div>
-          )}
+            {formik.touched.name && formik.errors.name && (
+              <div className={styles.error}>{formik.errors.name}</div>
+            )}
 
-          <button
-            className={`button ${styles.formButton}`}
-            type="submit"
-            disabled={loading}
-            aria-busy={loading}
-          >
-            {loading ? "Registering..." : "Sign up"}
-          </button>
-        </form>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              aria-label="Email"
+              {...formik.getFieldProps("email")}
+              className={
+                formik.touched.email && formik.errors.email
+                  ? styles.inputError
+                  : ""
+              }
+            />
+            {formik.touched.email && formik.errors.email && (
+              <div className={styles.error}>{formik.errors.email}</div>
+            )}
+
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Phone"
+              aria-label="Phone"
+              {...formik.getFieldProps("phone")}
+              className={
+                formik.touched.phone && formik.errors.phone
+                  ? styles.inputError
+                  : ""
+              }
+            />
+            <div className={styles.hint}>+38 (XXX) XXX - XX - XX</div>
+            {formik.touched.phone && formik.errors.phone && (
+              <div className={styles.error}>{formik.errors.phone}</div>
+            )}
+
+            <fieldset className={styles.positionFieldset}>
+              <legend className={styles.legend}>Select your position</legend>
+              {positions.map((pos) => (
+                <label
+                  key={pos.id}
+                  htmlFor={`position-${pos.id}`}
+                  className={styles.positionLabel}
+                >
+                  <input
+                    id={`position-${pos.id}`}
+                    type="radio"
+                    name="position_id"
+                    value={pos.id}
+                    checked={formik.values.position_id === String(pos.id)}
+                    onChange={() =>
+                      formik.setFieldValue("position_id", String(pos.id))
+                    }
+                  />
+                  {pos.name}
+                </label>
+              ))}
+              {formik.touched.position_id && formik.errors.position_id && (
+                <div className={styles.error}>{formik.errors.position_id}</div>
+              )}
+            </fieldset>
+
+            <input
+              id="photo"
+              type="file"
+              name="photo"
+              accept="image/jpeg, image/jpg"
+              onChange={onPhotoChange}
+              aria-label="Photo"
+              className={
+                formik.touched.photo && formik.errors.photo
+                  ? styles.inputError
+                  : ""
+              }
+            />
+            {photoPreview && (
+              <img
+                src={photoPreview}
+                alt="Preview"
+                className={styles.photoPreview}
+              />
+            )}
+            {formik.touched.photo && formik.errors.photo && (
+              <div className={styles.error}>{formik.errors.photo}</div>
+            )}
+
+            <button
+              className={`button ${styles.formButton}`}
+              type="submit"
+              disabled={loading}
+              aria-busy={loading}
+            >
+              {loading ? "Registering..." : "Sign up"}
+            </button>
+          </form>
+        )}
       </div>
     </section>
   );
