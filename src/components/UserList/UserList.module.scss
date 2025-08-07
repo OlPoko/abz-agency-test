@@ -4,18 +4,17 @@
 
   .title {
     font-weight: 400;
-    font-size: 40px;
-    line-height: 40px;
-    letter-spacing: 0%;
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: 0;
     text-align: center;
     vertical-align: bottom;
-    margin-bottom: 50px;
-    margin-top: 140px;
+    margin: 60px 0 40px;
   }
 
   .list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: 1fr;
     gap: 20px;
     list-style: none;
     padding: 0;
@@ -24,25 +23,24 @@
   .userCard {
     background: #fff;
     border-radius: 10px;
-    padding: 20px;
+    padding: 15px;
     text-align: center;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
     .photo {
       display: block;
-      margin: 0 auto;
-      width: 70px;
-      height: 70px;
+      margin: 0 auto 20px auto;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       object-fit: cover;
-      margin-bottom: 20px;
     }
 
     .name {
       font-weight: 400;
       font-size: 16px;
       line-height: 26px;
-      letter-spacing: 0%;
+      letter-spacing: 0;
       text-align: center;
     }
 
@@ -65,38 +63,35 @@
     border-radius: 80px;
     border: none;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 
     &:hover {
       background-color: #009ddc;
     }
   }
 
-  // 📱 Mobile (≤767px)
-  @media (max-width: 767px) {
-    .list {
-      grid-template-columns: 1fr;
+  @media (min-width: 768px) {
+    .title {
+      font-size: 40px;
+      line-height: 40px;
+      margin: 140px 0 50px;
     }
 
-    .userCard {
-      padding: 15px;
-      .name {
-        font-size: 16px;
-      }
-      .photo {
-        width: 60px;
-        height: 60px;
-      }
-    }
-  }
-
-  // 📲 Tablet (768–1023px)
-  @media (min-width: 768px) and (max-width: 1023px) {
     .list {
       grid-template-columns: repeat(2, 1fr);
     }
+
+    .userCard {
+      padding: 20px;
+
+      .photo {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 20px;
+      }
+    }
   }
 
-  // 💻 Desktop (≥1024px)
   @media (min-width: 1024px) {
     .list {
       grid-template-columns: repeat(3, 1fr);
