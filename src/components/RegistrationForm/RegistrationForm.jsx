@@ -109,55 +109,71 @@ export default function RegistrationForm({ onUserRegistered }) {
           <SuccessMessage />
         ) : (
           <form onSubmit={formik.handleSubmit} noValidate>
-            <input
-              type="text"
-              name="name"
-              placeholder="Your name"
-              aria-label="Name"
-              {...formik.getFieldProps("name")}
-              className={
-                formik.touched.name && formik.errors.name
-                  ? styles.inputError
-                  : ""
-              }
-            />
-            {formik.touched.name && formik.errors.name && (
-              <div className={styles.error}>{formik.errors.name}</div>
-            )}
+            {/* Name */}
+            <div className={styles.inputGroup}>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your name"
+                aria-label="Name"
+                {...formik.getFieldProps("name")}
+                className={
+                  formik.touched.name && formik.errors.name
+                    ? styles.inputError
+                    : ""
+                }
+              />
+              <div className={styles.error}>
+                {formik.touched.name && formik.errors.name
+                  ? formik.errors.name
+                  : "\u00A0"}
+              </div>
+            </div>
 
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              aria-label="Email"
-              {...formik.getFieldProps("email")}
-              className={
-                formik.touched.email && formik.errors.email
-                  ? styles.inputError
-                  : ""
-              }
-            />
-            {formik.touched.email && formik.errors.email && (
-              <div className={styles.error}>{formik.errors.email}</div>
-            )}
+            {/* Email */}
+            <div className={styles.inputGroup}>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                aria-label="Email"
+                {...formik.getFieldProps("email")}
+                className={
+                  formik.touched.email && formik.errors.email
+                    ? styles.inputError
+                    : ""
+                }
+              />
+              <div className={styles.error}>
+                {formik.touched.email && formik.errors.email
+                  ? formik.errors.email
+                  : "\u00A0"}
+              </div>
+            </div>
 
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone"
-              aria-label="Phone"
-              {...formik.getFieldProps("phone")}
-              className={
-                formik.touched.phone && formik.errors.phone
-                  ? styles.inputError
-                  : ""
-              }
-            />
-            <div className={styles.hint}>+38 (XXX) XXX - XX - XX</div>
-            {formik.touched.phone && formik.errors.phone && (
-              <div className={styles.error}>{formik.errors.phone}</div>
-            )}
+            {/* Phone */}
+            <div className={styles.inputGroup}>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone"
+                aria-label="Phone"
+                {...formik.getFieldProps("phone")}
+                className={
+                  formik.touched.phone && formik.errors.phone
+                    ? styles.inputError
+                    : ""
+                }
+              />
+              <div className={styles.hint}>+38 (XXX) XXX - XX - XX</div>
+              <div className={styles.error}>
+                {formik.touched.phone && formik.errors.phone
+                  ? formik.errors.phone
+                  : "\u00A0"}
+              </div>
+            </div>
 
+            {/* Position */}
             <fieldset className={styles.positionFieldset}>
               <legend className={styles.legend}>Select your position</legend>
               {positions.map((pos) => (
@@ -179,11 +195,14 @@ export default function RegistrationForm({ onUserRegistered }) {
                   {pos.name}
                 </label>
               ))}
-              {formik.touched.position_id && formik.errors.position_id && (
-                <div className={styles.error}>{formik.errors.position_id}</div>
-              )}
+              <div className={styles.error}>
+                {formik.touched.position_id && formik.errors.position_id
+                  ? formik.errors.position_id
+                  : "\u00A0"}
+              </div>
             </fieldset>
 
+            {/* Photo Upload */}
             <div className={styles.uploadWrapper}>
               <label htmlFor="photo" className={styles.uploadLabel}>
                 <span className={styles.uploadButton}>Upload</span>
@@ -201,20 +220,21 @@ export default function RegistrationForm({ onUserRegistered }) {
                 onChange={onPhotoChange}
                 className={styles.hiddenInput}
               />
+              {photoPreview && (
+                <img
+                  src={photoPreview}
+                  alt="Preview"
+                  className={styles.photoPreview}
+                />
+              )}
+              <div className={styles.error}>
+                {formik.touched.photo && formik.errors.photo
+                  ? formik.errors.photo
+                  : "\u00A0"}
+              </div>
             </div>
 
-            {photoPreview && (
-              <img
-                src={photoPreview}
-                alt="Preview"
-                className={styles.photoPreview}
-              />
-            )}
-
-            {formik.touched.photo && formik.errors.photo && (
-              <div className={styles.error}>{formik.errors.photo}</div>
-            )}
-
+            {/* Submit Button */}
             <button
               className={`button ${styles.formButton}`}
               type="submit"

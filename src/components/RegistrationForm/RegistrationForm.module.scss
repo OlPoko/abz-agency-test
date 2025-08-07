@@ -18,7 +18,13 @@
   form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
+
+    .inputGroup {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
 
     input[type="text"],
     input[type="email"],
@@ -30,6 +36,14 @@
       outline-offset: 2px;
     }
 
+    // Обгортка для інпутів з помилками/підказками
+    .fieldWrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 58px; // Фіксована висота, щоб помилка не зміщувала форму
+    }
+
     .inputError {
       border-color: red;
       outline-color: red;
@@ -38,14 +52,16 @@
     .error {
       color: red;
       font-size: 12px;
-      margin-top: 4px;
+      min-height: 14px;
+      margin: 0;
     }
 
-    .successMsg {
-      color: green;
-      text-align: center;
-      margin-bottom: 20px;
-      font-weight: 700;
+    .hint {
+      font-size: 12px;
+      color: #7e7e7e;
+      line-height: 14px;
+      min-height: 14px;
+      margin: 0;
     }
 
     fieldset {
@@ -75,22 +91,10 @@
       }
     }
 
-    .hint {
-      font-size: 12px;
-      color: #666;
-      margin-top: 4px;
-      font-style: italic;
-    }
-
-    .formButton {
-      align-self: center;
-      background-color: #b4b4b4;
-    }
-
-    // --- Custom upload section ---
     .uploadWrapper {
       display: flex;
       flex-direction: column;
+      gap: 6px;
     }
 
     .uploadLabel {
@@ -136,13 +140,17 @@
       object-fit: cover;
       border: 1px solid #ccc;
     }
-  }
 
-  .hint {
-    font-size: 12px;
-    color: #666;
-    margin-top: 4px;
-    margin-bottom: -12px;
-    font-style: italic;
+    .formButton {
+      align-self: center;
+      background-color: #b4b4b4;
+    }
+
+    .successMsg {
+      color: green;
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
   }
 }
